@@ -27,10 +27,11 @@ All messages include an HSC version and a type in their first line, and will end
 #### New Handshake (Initiator -> Receiver)
 ```
 HSCv1 new-handshake
+Sender: <sender-id>
 Key: <receiver user id>,<pubkey> # Note that this will be encryptedd
 Hash: <hash of decrypted field>
-Hashver: <version of hashes available to use>
-Ciphver: <ciphers available to use>
+Hash-Ver: <version of hashes available to use>
+Cipher-Ver: <ciphers available to use>
 ```
 
 #### New Handshake Return (Receiver -> Initiator)
@@ -38,43 +39,46 @@ Ciphver: <ciphers available to use>
 HSCv1 new-handshake-return
 Key: <receiver user id>,<pubkey> # Note that this will be encryptedd
 Hash: <hash of decrypted field>
-Hashver: <version of hashes to available use>
-Ciphver: <ciphers available to use>
+Hash-Ver: <version of hashes to available use>
+Cipher-Ver: <ciphers available to use>
 ```
 
 #### Existing Handshake (Initiator -> Receiver)
 ```
 HSCv1 existing-handshake
+Sender: <sender-id>
 Key: <previous secret encrypted with pubkey>
-Hashver: <version of hashes to available use>
-Ciphver: <ciphers available to use>
+Hash-Ver: <version of hashes to available use>
+Cipher-Ver: <ciphers available to use>
 ```
 
 #### Existing Handshake Return (Receiver -> Initiator)
 ```
 HSCv1 existing-handshake-return
 Key: <previous secret encrypted with pubkey>
-Hashver: <version of hashes to available use>
-Ciphver: <ciphers available to use>
+Hash-Ver: <version of hashes to available use>
+Cipher-Ver: <ciphers available to use>
 ```
 
 #### Handshake Session Key (Initiator -> Receiver)
 ```
 HSCv1 handshake-session
 Key: <session key encrypted with pubkey>
-Selhash: <selected hash type>
-Selciph: <selected cipher type>
+Sel-Hash: <selected hash type>
+Sel-Cipher: <selected cipher type>
 ```
 
 ### Messaging
-### Forwarded Message (i.e. for Initiator -> Escrow -> ... -> Receiver)
+#### Forwarded Message (i.e. for Initiator -> Escrow -> ... -> Receiver)
 ```
 HSCv1 forward
+Sender: <sender id>
 Endpoint: <receiver id>
 Message: <message content, with END-HSC line included>
+Should-Cache: <True/False>
 ```
 
-### Simple Message
+#### Simple Message
 ```
 HSCv1 msg
 Message: [msg]<message contents>[/msg]
